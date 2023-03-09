@@ -1,0 +1,208 @@
+@import "variables";
+@import "mixins";
+@import "functions";
+@import "resets";
+
+// Loader
+
+.loader {
+    @include flex ();
+    @include fullScreen (1);
+    @include background ();
+
+    #{&}__loading {
+        position: relative;
+        height: 100px;
+        width: 100px;
+        background-color: transparent;
+        border: 10px solid $primaryBackgroundColor;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: loading 0.7s linear infinite;
+    }
+
+    &.hide {
+        display: none;
+    }
+}
+
+@keyframes loading {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// Main
+
+.main {
+    @include flex (flex-start);
+    min-height: 100vh;
+
+    #{&}__form {
+        width: calc(100% - 100px);
+
+        &__search {
+            position: relative;
+            background-color: transparent;
+            padding: 10px;
+
+            margin: {
+                top: 50px;
+                bottom: 70px;
+            }
+
+            border: 2px solid $primaryBackgroundColor;
+            border-radius: 5px;
+            font-weight: weight(bold);
+            width: 100%;
+            box-shadow: $primaryBoxShadow1;
+            transition: all 0.5s ease-in-out;
+
+            &:hover,
+            &:focus,
+            &:valid {
+                background-color: $primaryBackgroundColor;
+            }
+
+            &::placeholder {
+                opacity: 0.7;
+                letter-spacing: 1px;
+                color: $primaryColor;
+                text-align: center;
+                font-weight: weight(normal);
+            }
+
+            &::-webkit-search-cancel-button {
+                appearance: none;
+                height: 24px;
+                width: 24px;
+                background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20fill=%22%23ffffff%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20width=%2224%22%3E%3Cpath%20d=%22M0%200h24v24H0V0z%22%20fill=%22none%22/%3E%3Cpath%20d=%22M18.3%205.71c-.39-.39-1.02-.39-1.41%200L12%2010.59%207.11%205.7c-.39-.39-1.02-.39-1.41%200-.39.39-.39%201.02%200%201.41L10.59%2012%205.7%2016.89c-.39.39-.39%201.02%200%201.41.39.39%201.02.39%201.41%200L12%2013.41l4.89%204.89c.39.39%201.02.39%201.41%200%20.39-.39.39-1.02%200-1.41L13.41%2012l4.89-4.89c.38-.38.38-1.02%200-1.4z%22/%3E%3C/svg%3E);
+                cursor: pointer;
+            }
+        }
+    }
+
+    #{&}__tracks {
+        position: relative;
+
+        margin: {
+            bottom: 70px;
+        }
+
+        width: calc(100% - 200px);
+
+        &__track {
+            position: relative;
+            @include flex (space-between, center, row);
+            width: 100%;
+            background-color: transparent;
+            padding: 10px 15px;
+
+            margin: {
+                bottom: 20px;
+            }
+
+            border: 2px solid $primaryBackgroundColor;
+            border-radius: 10px;
+            box-shadow: $primaryBoxShadow2;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+
+            &:last-child {
+                margin: {
+                    bottom: 0;
+                }
+            }
+
+            &__container__name {
+                margin: {
+                    bottom: 5px;
+                }
+
+                letter-spacing: 1px;
+            }
+
+            &__container__creator {
+                font-weight: weight(regular);
+                opacity: 0.7;
+            }
+
+            &__button {
+                position: relative;
+                @include flex (center, center, row);
+                background-color: $primaryBackgroundColor;
+                padding: 5px;
+                font-weight: weight(bold);
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: $primaryBoxShadow2;
+                transition: all 0.5s ease-in-out;
+            }
+
+            &:hover {
+                background-color: $primaryBackgroundColor;
+                transform: scale(0.95);
+
+                button {
+                    @include background ();
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    #{&}__lyrics {
+        position: relative;
+        background-color: transparent;
+        border: 2px solid $primaryBackgroundColor;
+        border-radius: 5px;
+
+        margin: {
+            bottom: 50px;
+        }
+
+        padding: 10px;
+        text-align: center;
+        width: calc(100% - 400px);
+        transition: all 0.3s ease-in-out;
+
+        &__name {
+            margin: {
+                bottom: 20px;
+            }
+        }
+
+        &__lyric {
+            font-weight: weight(medium);
+            letter-spacing: 1px;
+
+            margin: {
+                bottom: 20px;
+            }
+        }
+
+        &__copyBtn {
+            position: relative;
+            background-color: $primaryBackgroundColor;
+            padding: 5px;
+            font-weight: weight(bold);
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: $primaryBoxShadow2;
+            transition: all 0.5s ease-in-out;
+        }
+
+        &:hover {
+            transform: scale(0.95);
+
+            button {
+                background-color: transparent;
+                box-shadow: none;
+                transform: translateY(-10px);
+            }
+        }
+    }
+}
+
+@import "resp";

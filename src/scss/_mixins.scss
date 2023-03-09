@@ -1,0 +1,32 @@
+@mixin fullScreen ($index: 0) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: $index;
+    overflow: hidden;
+}
+
+@mixin flex ($justify: center, $align: center, $direction: column) {
+    position: relative;
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+}
+
+@mixin background () {
+    background-image: url("https://cdn.jsdelivr.net/gh/tanwarjigyasu/Lyrically/assets/background.jpg");
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+@mixin resp ($min_max_val) {
+    @media (max-width: #{$min_max_val}) {
+        @content;
+    }
+}
