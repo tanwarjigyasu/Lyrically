@@ -12,9 +12,10 @@
     "categories": [
         "song",
         "music",
-        "lyrics"
+        "lyrics",
+        "lyrics-fetcher"
     ],
-    "description": "Lyrically provides you lyrics of any song you want as fast as it can. It fetch the lyrics from https://api.lyrics.ovh/",
+    "description": "Lyrically provides you lyrics of any song you want as fast as it can. It fetch the lyrics from https://api.lyrics.ovh/v1/",
     "icons": [
         {
             "src": "./assets/icon.png",
