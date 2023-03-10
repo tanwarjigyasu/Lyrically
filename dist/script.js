@@ -18,39 +18,54 @@ onload = () => {
             theme: "glass",
             timer: 6500
         }));
-    document.form.onsubmit = e => {
-        $(".loader").classList.remove("hide");
-        document.form.search.removeFocus();
-        e.preventDefault();
-        if ($(".main__tracks")) {
-            $(".main__tracks").remove();
-        }
-        if ($(".main__lyrics")) {
-            $(".main__lyrics").remove();
-        }
-        let value = document.form.search.value.trim();
-        fetch("https://api.lyrics.ovh/suggest/" + value)
-            .then(resp => {
-                resp.json();
-            })
-            .then(data => {
-                makeTracks(data.data);
-                $(".loader").classList.add("hide");
-            }).catch(err => Toast({
+    document.form.onsubmit = async e => {
+        const response = await fetch(".");
+        if (response.status >= 200 && response.status < 500) {
+            $(".loader").classList.remove("hide");
+            document.form.search.removeFocus();
+            e.preventDefault();
+            if ($(".main__tracks")) {
+                $(".main__tracks").remove();
+            }
+            if ($(".main__lyrics")) {
+                $(".main__lyrics").remove();
+            }
+            let value = document.form.search.value.trim();
+            fetch("https://api.lyrics.ovh/suggest/" + value)
+                .then(resp => {
+                    resp.json();
+                })
+                .then(data => {
+                    makeTracks(data.data);
+                    $(".loader").classList.add("hide");
+                }).catch(err => Toast({
+                    enableIcon: true,
+                    icon: {
+                        type: "cross"
+                    },
+                    position: "bottom-left",
+                    animation: "Left",
+                    text: "Oops! Something went wrong. Please try again later.",
+                    theme: "glass",
+                    timer: 6500,
+                    onClose: () => $(".loader").classList.add("hide")
+                }));
+            document.form.search.value = "";
+        } else {
+            Toast({
                 enableIcon: true,
                 icon: {
-                    type: "cross"
+                    type: "warning"
                 },
                 position: "bottom-left",
                 animation: "Left",
-                text: "Oops! Something went wrong. Please try again later.",
+                text: "Oops! Internet Connection Lost",
                 theme: "glass",
-                timer: 6500,
-                onClose: () => $(".loader").classList.add("hide")
-            }));
-        document.form.search.value = "";
+                timer: 6500
+            });
+        }
+        $(".loader").classList.add("hide");
     }
-    $(".loader").classList.add("hide");
 }
 
 const makeTracks = tracks => {
