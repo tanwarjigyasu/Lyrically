@@ -64,8 +64,8 @@ onload = () => {
                 timer: 6500
             });
         }
-        $(".loader").classList.add("hide");
     }
+    $(".loader").classList.add("hide");
 }
 
 const makeTracks = tracks => {
